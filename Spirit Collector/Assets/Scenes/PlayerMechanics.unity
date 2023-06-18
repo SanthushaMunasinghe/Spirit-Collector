@@ -207,6 +207,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &630711450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 630711451}
+  m_Layer: 0
+  m_Name: ShotPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &630711451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630711450}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1736466969}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667194854
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +355,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 667194855}
+  - {fileID: 630711451}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -340,10 +372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputManager: {fileID: 1946452043}
-  shootInterval: 0.25
-  rotSpeed: 2
-  moveSpeed: 5
-  bullet: {fileID: 0}
+  playerScriptable: {fileID: 11400000, guid: 6a7bce4146e768f47a4196a6ebaf226b, type: 2}
+  shotPoint: {fileID: 630711451}
 --- !u!50 &1736466971
 Rigidbody2D:
   serializedVersion: 4
@@ -457,6 +487,7 @@ GameObject:
   - component: {fileID: 1946452041}
   - component: {fileID: 1946452043}
   - component: {fileID: 1946452042}
+  - component: {fileID: 1946452044}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -533,3 +564,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d417f05c15b811246a2e5e74f1331e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1946452044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946452040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9941cb102ed886c4fa81bd6b637b359e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBulletPrefab: {fileID: 5145693255199403781, guid: 596e879a121380f4c91e2553bcfa7a06, type: 3}
+  bulletCount: 0

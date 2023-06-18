@@ -5,22 +5,31 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInputManager playerInputManager;
+    [SerializeField] private PlayerScriptableObject playerScriptable;
 
     private Camera mainCam;
-    private Rigidbody2D rb;
-    private Vector2 targetMousePos;
-    private Vector2 movementVec;
+    private Rigidbody2D playerRb;
     private bool enableShoot = true;
 
-    [Header("Movement Settings")]
-    [SerializeField] private float shootInterval = 0.25f;
-    [SerializeField] private float rotSpeed = 10.0f;
-    [SerializeField] private float moveSpeed = 10.0f;
+    private Vector2 targetMousePos;
+    private Vector2 movementVec;
+
+    private Vector2 shotPointVec;
+
+    private float rotSpeed;
+    private float moveSpeed;
+
+    private float shootingRate;
+
+    [SerializeField] private Transform shotPoint;
 
     void Awake()
     {
         mainCam = Camera.main;
-        rb = GetComponent<Rigidbody2D>();
+        playerRb = GetComponent<Rigidbody2D>();
+        rotSpeed = playerScriptable.rotSpeed;
+        moveSpeed = playerScriptable.moveSpeed;
+        shootingRate = playerScriptable.shootingRate;
     }
 
     void Update()
@@ -29,6 +38,8 @@ public class PlayerController : MonoBehaviour
         SetMousePosition();
         PlayerShoot();
         PlayerRotation();
+
+        shotPointVec = shotPoint.position;
     }
 
     private void FixedUpdate()
@@ -45,7 +56,9 @@ public class PlayerController : MonoBehaviour
         {
             BasePool.Instance.bulletCount++;
             GameObject bulletClone = BasePool.Instance.playerBulletPool.Get();
-            StartCoroutine(EnableShoot(shootInterval));
+            bulletClone.transform.position = shotPointVec;
+            bulletClone.transform.rotation = transform.rotation;
+            StartCoroutine(EnableShoot(shootingRate));
         }
     }
 
@@ -78,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontalInput, verticalInput, 0.0f) * moveSpeed;
 
-        rb.AddForce(movement);
+        playerRb.AddForce(movement);
     }
 
     //Set Input Vectors

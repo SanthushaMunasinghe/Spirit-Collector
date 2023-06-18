@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotSpeed = 10.0f;
     [SerializeField] private float moveSpeed = 10.0f;
 
-    [Header("Shoot")]
-
     void Awake()
     {
         mainCam = Camera.main;
@@ -45,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
         if (playerInputManager.IsShootPressed())
         {
+            BasePool.Instance.bulletCount++;
+            GameObject bulletClone = BasePool.Instance.playerBulletPool.Get();
             StartCoroutine(EnableShoot(shootInterval));
         }
     }

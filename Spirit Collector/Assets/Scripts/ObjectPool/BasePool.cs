@@ -32,4 +32,23 @@ public class BasePool : MonoBehaviour
             _instance = this;
         }
     }
+
+    private void Start()
+    {
+        playerBulletPool = NewPool(playerBulletPrefab, 30, 100);
+    }
+
+    private ObjectPool<GameObject> NewPool(GameObject prefab, int minValue = 241, int maxValue = 300, bool check = false)
+    {
+        return new ObjectPool<GameObject>(() =>
+        {
+            return Instantiate(prefab);
+        },
+            (GameObject obj) => obj.gameObject.SetActive(true),
+            (GameObject obj) => obj.gameObject.SetActive(false),
+            (GameObject obj) => Destroy(obj),
+            check,
+            minValue,
+            maxValue);
+    }
 }

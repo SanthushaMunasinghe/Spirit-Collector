@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private float shootingRate;
 
+    private bool isLight = true;
+
     [SerializeField] private Transform shotPoint;
 
     void Awake()
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         SetMousePosition();
         PlayerShoot();
         PlayerRotation();
+        ChangeType();
 
         shotPointVec = shotPoint.position;
     }
@@ -48,7 +51,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Shooting
-    public void PlayerShoot()
+    private void PlayerShoot()
     {
         if (!enableShoot) return;
 
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Rotation
-    public void PlayerRotation()
+    private void PlayerRotation()
     {
         Quaternion currentRotation = transform.rotation;
 
@@ -84,7 +87,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Movement
-    public void PlayerMovement()
+    private void PlayerMovement()
     {
         float horizontalInput = movementVec.x;
         float verticalInput = movementVec.y;
@@ -94,13 +97,31 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(movement);
     }
 
+    //Change
+    private void ChangeType()
+    {
+        if (playerInputManager.IsChangePressed())
+        {
+            isLight = !isLight;
+
+            if (isLight)
+            {
+                GetComponent<SpriteRenderer>().sprite = playerScriptable.sprites[0];
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sprite = playerScriptable.sprites[1];
+            }
+        }
+    }
+
     //Set Input Vectors
-    public void SetMousePosition()
+    private void SetMousePosition()
     {
         targetMousePos = mainCam.ScreenToWorldPoint(playerInputManager.GetMousePosition());
     }
 
-    public void SetMovement()
+    private void SetMovement()
     {
         movementVec = playerInputManager.GetMovement();
     }

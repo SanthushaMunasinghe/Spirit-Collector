@@ -30,8 +30,8 @@ public class GridManager : MonoBehaviour
 
     private void CreateWall()
     {
-        FindVector(ref entrancePos);
-        FindVector(ref exitPos);
+        WallEdgeFilter(ref entrancePos);
+        WallEdgeFilter(ref exitPos);
 
         Instantiate(floorPrefab, entrancePos, Quaternion.identity, floorParent);
         Instantiate(floorPrefab, exitPos, Quaternion.identity, floorParent);
@@ -42,7 +42,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void FindVector(ref Vector2 pos)
+    private void WallEdgeFilter(ref Vector2 pos)
     {
         bool found = false;
 
@@ -66,8 +66,17 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < Random.Range(5, 11); i++)
         {
             int randIndex = Random.Range(0, floorPosList.Count);
-            Instantiate(wallPrefab, floorPosList[randIndex], Quaternion.identity, wallParent);
-            floorPosList.RemoveAt(randIndex);
+            Vector2 randPos = floorPosList[randIndex];
+
+            // Check if the random position is adjacent to the border
+            bool isAdjacentToBorder = Mathf.Approximately(randPos.x, startPos.x) || Mathf.Approximately(randPos.x, endPos.x)
+                || Mathf.Approximately(randPos.y, startPos.y) || Mathf.Approximately(randPos.y, endPos.y);
+
+            if (!isAdjacentToBorder)
+            {
+                Instantiate(wallPrefab, randPos, Quaternion.identity, wallParent);
+                floorPosList.RemoveAt(randIndex);
+            }
         }
 
         foreach (Vector2 pos in floorPosList)

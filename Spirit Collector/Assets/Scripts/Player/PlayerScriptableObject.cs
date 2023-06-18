@@ -9,4 +9,7 @@ public class PlayerScriptableObject : ScriptableObject
 
     [Header("Shoot Settings")]
     public float shootingRate = 0.25f;
+
+    [Header("Appearance")]
+    public Sprite[] sprites;
 }

@@ -15,3 +15,5 @@ MonoBehaviour:
   moveSpeed: 5
   detectionRadius: 5
   impulseForce: 10
+  enemyType: 0
+  collectableSpiritObj: {fileID: 417395342775971026, guid: cca15637bb969b74bbe6834849f32bcd, type: 3}

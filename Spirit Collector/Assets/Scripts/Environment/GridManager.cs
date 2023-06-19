@@ -138,4 +138,16 @@ public class GridManager : Subject
     {
         NotifyObservers(Random.Range(2, 6), ScoreType.Score);
     }
+
+    public void NotifyType(EntityType eType)
+    {
+        if (eType == EntityType.Dark)
+        {
+            NotifyObservers(1, ScoreType.DarkSpirit);
+        }
+        else
+        {
+            NotifyObservers(Random.Range(1, 5), ScoreType.LightSpirit);
+        }
+    }
 }

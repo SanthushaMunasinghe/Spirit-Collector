@@ -11,4 +11,5 @@ public class EnemyScriptableObject : ScriptableObject
     public float impulseForce = 10f;
 
     public EntityType enemyType;
+    public GameObject collectableSpiritObj;
 }

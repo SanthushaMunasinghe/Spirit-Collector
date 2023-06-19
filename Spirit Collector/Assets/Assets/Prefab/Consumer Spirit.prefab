@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1067792962960339747}
   m_Layer: 0
   m_Name: Consumer Spirit
-  m_TagString: Player
+  m_TagString: PlayerController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

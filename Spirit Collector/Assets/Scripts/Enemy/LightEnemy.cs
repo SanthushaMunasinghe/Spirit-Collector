@@ -98,6 +98,8 @@ public class LightEnemy : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        GameObject collectableClone = Instantiate(enemyScriptable.collectableSpiritObj, transform.position, Quaternion.identity);
+        collectableClone.GetComponent<CollectableSpirit>().gridManager = gridManager;
         Destroy(gameObject);
     }
 }

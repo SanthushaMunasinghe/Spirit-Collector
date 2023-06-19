@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerInputManager playerInputManager;
+    public PlayerInputManager playerInputManager;
     [SerializeField] private PlayerScriptableObject playerScriptable;
 
     private Camera mainCam;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private float shootingRate;
 
-    private bool isLight = true;
+    private EntityType playerType;
 
     [SerializeField] private Transform shotPoint;
 
@@ -57,10 +57,15 @@ public class PlayerController : MonoBehaviour
 
         if (playerInputManager.IsShootPressed())
         {
-            BasePool.Instance.bulletCount++;
+            BasePool.Instance.playerbulletCount++;
             GameObject bulletClone = BasePool.Instance.playerBulletPool.Get();
             bulletClone.transform.position = shotPointVec;
             bulletClone.transform.rotation = transform.rotation;
+
+            Bullet bullet = bulletClone.GetComponent<Bullet>();
+            bullet.bulletType = playerType;
+            bullet.SetSprite();
+
             StartCoroutine(EnableShoot(shootingRate));
         }
     }
@@ -102,15 +107,15 @@ public class PlayerController : MonoBehaviour
     {
         if (playerInputManager.IsChangePressed())
         {
-            isLight = !isLight;
-
-            if (isLight)
+            if (playerType == EntityType.Dark)
             {
                 GetComponent<SpriteRenderer>().sprite = playerScriptable.sprites[0];
+                playerType = EntityType.Light;
             }
-            else
+            else if (playerType == EntityType.Light)
             {
                 GetComponent<SpriteRenderer>().sprite = playerScriptable.sprites[1];
+                playerType = EntityType.Dark;
             }
         }
     }
@@ -125,4 +130,10 @@ public class PlayerController : MonoBehaviour
     {
         movementVec = playerInputManager.GetMovement();
     }
+}
+
+public enum EntityType
+{
+    Light,
+    Dark
 }

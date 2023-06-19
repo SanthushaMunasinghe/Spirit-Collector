@@ -11,7 +11,7 @@ public class BasePool : MonoBehaviour
 
     [SerializeField] private GameObject playerBulletPrefab;
 
-    public int bulletCount = 0;
+    public int playerbulletCount = 0;
 
     public static BasePool Instance
     {

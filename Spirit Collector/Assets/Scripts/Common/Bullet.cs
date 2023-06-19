@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float bulletSpeed = 5.0f;
-    [SerializeField] private float bulletLifetime = 10.0f;
+    [SerializeField] private BulletScriptableObject bulletScriptable;
+    private float currentLifetime;
+    public EntityType bulletType;
+
+    private void OnEnable()
+    {
+        currentLifetime = bulletScriptable.bulletLifetime;
+    }
+
+    public void SetSprite()
+    {
+        if (bulletType == EntityType.Light)
+            GetComponent<SpriteRenderer>().sprite = bulletScriptable.bulletSprites[0];
+        else
+            GetComponent<SpriteRenderer>().sprite = bulletScriptable.bulletSprites[1];
+    }
 
     void Update()
     {
-        if (bulletLifetime <= 0)
+        if (currentLifetime <= 0)
         {
             BasePool.Instance.playerBulletPool.Release(gameObject);
         }
         else
         {
-            bulletLifetime -= Time.deltaTime;
+            currentLifetime -= Time.deltaTime;
         }
 
-        transform.position += transform.up * bulletSpeed * Time.deltaTime;
+        transform.position += transform.up * bulletScriptable.bulletSpeed * Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

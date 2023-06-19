@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class GridManager : Subject
 {
     [SerializeField] private GridScriptableObject gridScriptable;
     [SerializeField] private Transform wallParent;
@@ -117,15 +117,25 @@ public class GridManager : MonoBehaviour
             if (randIndex % 2 == 1)
             {
                 GameObject lightSpiritClone = Instantiate(gridScriptable.lightSpiritPrefab, currentPos, Quaternion.identity);
-                lightSpiritClone.GetComponent<LightEnemy>().enemyScriptable.enemyType = EntityType.Light;
+
+                LightEnemy lightEnemy = lightSpiritClone.GetComponent<LightEnemy>();
+                lightEnemy.enemyScriptable.enemyType = EntityType.Light;
+                lightEnemy.gridManager = this;
             }
             else
             {
                 GameObject darkSpiritClone = Instantiate(gridScriptable.darkSpiritPrefab, currentPos, Quaternion.identity);
-                darkSpiritClone.GetComponent<DarkEnemy>().enemyScriptable.enemyType = EntityType.Dark;
+                DarkEnemy darkEnemy = darkSpiritClone.GetComponent<DarkEnemy>();
+                darkEnemy.enemyScriptable.enemyType = EntityType.Dark;
+                darkEnemy.gridManager = this;
             }
 
             floorPosList.Remove(currentPos);
         }
+    }
+
+    public void NotifyScore()
+    {
+        NotifyObservers(Random.Range(2, 6), ScoreType.Score);
     }
 }

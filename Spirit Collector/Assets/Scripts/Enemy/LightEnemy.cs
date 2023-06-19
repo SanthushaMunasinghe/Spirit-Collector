@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightEnemy : MonoBehaviour
 {
     public EnemyScriptableObject enemyScriptable;
+    public GridManager gridManager;
 
     public float waitDuration = 2f;
 
@@ -61,6 +62,7 @@ public class LightEnemy : MonoBehaviour
             if (collision.collider.gameObject.GetComponent<Bullet>().bulletType == EntityType.Dark)
             {
                 health--;
+                gridManager.NotifyScore();
             }
         }
     }

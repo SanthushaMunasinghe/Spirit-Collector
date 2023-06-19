@@ -5,6 +5,7 @@ using UnityEngine;
 public class DarkEnemy : MonoBehaviour
 {
     public EnemyScriptableObject enemyScriptable;
+    public GridManager gridManager;
 
     private int health;
 
@@ -64,6 +65,7 @@ public class DarkEnemy : MonoBehaviour
             if (collision.collider.gameObject.GetComponent<Bullet>().bulletType == EntityType.Light)
             {
                 health--;
+                gridManager.NotifyScore();
             }
         }
     }

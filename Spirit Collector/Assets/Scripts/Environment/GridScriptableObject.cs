@@ -8,6 +8,7 @@ public class GridScriptableObject : ScriptableObject
     [Header("Grid Settings")]
     public GameObject wallPrefab;
     public GameObject floorPrefab;
+    public GameObject portalPrefab;
     public Vector2 startPos;
     public Vector2 endPos;
 

@@ -48,6 +48,8 @@ public class GridManager : Subject
         WallEdgeFilter(ref entrancePos);
         WallEdgeFilter(ref exitPos);
 
+        Instantiate(gridScriptable.portalPrefab, exitPos, Quaternion.identity);
+
         Instantiate(gridScriptable.floorPrefab, entrancePos, Quaternion.identity, floorParent);
         Instantiate(gridScriptable.floorPrefab, exitPos, Quaternion.identity, floorParent);
 
@@ -141,13 +143,15 @@ public class GridManager : Subject
 
     public void NotifyType(EntityType eType)
     {
+        int Value = Random.Range(1, 5);
+
         if (eType == EntityType.Dark)
         {
-            NotifyObservers(1, ScoreType.DarkSpirit);
+            NotifyObservers(Value, ScoreType.DarkSpirit);
         }
         else
         {
-            NotifyObservers(Random.Range(1, 5), ScoreType.LightSpirit);
+            NotifyObservers(Value, ScoreType.LightSpirit);
         }
     }
 }

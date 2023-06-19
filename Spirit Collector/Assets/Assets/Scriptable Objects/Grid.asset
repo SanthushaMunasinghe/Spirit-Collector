@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 9100780473294639289, guid: 6db8fa97447c15447a8ff5649a824b2d, type: 3}
   floorPrefab: {fileID: 3890207408638238734, guid: acc95ae528016ec4b89e443a946511c7, type: 3}
+  portalPrefab: {fileID: 2165888780486558696, guid: 79d7e5211546fa04aa453154abc244f7, type: 3}
   startPos: {x: -9.25, y: -5.25}
   endPos: {x: 9.75, y: 5.75}
   playerPrefab: {fileID: 1067792962960339744, guid: 421b3663eaa12b44f98738101ff6a086, type: 3}

@@ -17,6 +17,7 @@ public class CollectableSpirit : MonoBehaviour
         if (collision.CompareTag("PlayerController"))
         {
             gridManager.NotifyType(collectableSpiritSciptable.entityType);
+            gridManager.HealPlayer();
             Destroy(gameObject);
         }
     }

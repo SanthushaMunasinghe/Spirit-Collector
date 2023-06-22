@@ -11,14 +11,14 @@ public class ScoreSystem : MonoBehaviour, IObserver
     [SerializeField] private TextMeshProUGUI lightSTxt;
     [SerializeField] private TextMeshProUGUI darkSTxt;
 
-    public void OnNotify(int amount, ScoreType sType)
+    public void OnNotify(int amount, ValueType vType)
     {
-        if (sType == ScoreType.Score)
+        if (vType == ValueType.Score)
         {
             CurrentScore.currentScore += amount;
             scoreTxt.text = $"Score: {CurrentScore.currentScore}";
         }
-        else if (sType == ScoreType.LightSpirit)
+        else if (vType == ValueType.LightSpiritCount)
         {
             CurrentScore.currentLightSpirits += amount;
             lightSTxt.text = $"Light Spirits: {CurrentScore.currentLightSpirits}";

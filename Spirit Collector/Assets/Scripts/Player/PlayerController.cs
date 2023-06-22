@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerInputManager playerInputManager;
     [SerializeField] private PlayerScriptableObject playerScriptable;
+    private PlayerHealth playerHealth;
 
     private Camera mainCam;
     private Rigidbody2D playerRb;
@@ -32,6 +33,11 @@ public class PlayerController : MonoBehaviour
         rotSpeed = playerScriptable.rotSpeed;
         moveSpeed = playerScriptable.moveSpeed;
         shootingRate = playerScriptable.shootingRate;
+    }
+
+    void Start()
+    {
+        playerHealth = GameObject.Find("GameManager").GetComponent<PlayerHealth>();
     }
 
     void Update()
@@ -102,7 +108,7 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(movement);
     }
 
-    //Change
+    //Change Type
     private void ChangeType()
     {
         if (playerInputManager.IsChangePressed())
@@ -117,6 +123,15 @@ public class PlayerController : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = playerScriptable.sprites[1];
                 playerType = EntityType.Dark;
             }
+        }
+    }
+
+    //Player Damage
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            playerHealth.DamageEnemy();
         }
     }
 

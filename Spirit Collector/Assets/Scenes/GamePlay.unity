@@ -638,6 +638,7 @@ GameObject:
   - component: {fileID: 717330507}
   - component: {fileID: 717330508}
   - component: {fileID: 717330509}
+  - component: {fileID: 717330510}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -658,6 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridScriptable: {fileID: 11400000, guid: 4457264050d2adb4eac064867b25bc6c, type: 2}
+  playerHealth: {fileID: 717330510}
   wallParent: {fileID: 722605493}
   floorParent: {fileID: 342199444}
 --- !u!4 &717330505
@@ -763,6 +765,20 @@ MonoBehaviour:
   scoreTxt: {fileID: 2122239691}
   lightSTxt: {fileID: 1112680558}
   darkSTxt: {fileID: 636067776}
+--- !u!114 &717330510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717330503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b87f97bfe1d6c8419e2823158ab2dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reduceSpeed: 3
+  healthTxt: {fileID: 478919828}
 --- !u!1 &722605492
 GameObject:
   m_ObjectHideFlags: 0

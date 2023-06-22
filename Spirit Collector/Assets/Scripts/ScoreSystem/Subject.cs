@@ -16,7 +16,7 @@ public abstract class Subject : MonoBehaviour
         _observers.Remove(observer);
     }
 
-    protected void NotifyObservers(int amount, ScoreType type)
+    protected void NotifyObservers(int amount, ValueType type)
     {
         _observers.ForEach((_observer) =>
         {
@@ -27,12 +27,13 @@ public abstract class Subject : MonoBehaviour
 
 public interface IObserver
 {
-    public void OnNotify(int amount, ScoreType type);
+    public void OnNotify(int amount, ValueType type);
 }
 
-public enum ScoreType
+public enum ValueType
 {
     Score,
-    DarkSpirit,
-    LightSpirit,
+    DarkSpiritCount,
+    LightSpiritCount,
+    Health,
 }

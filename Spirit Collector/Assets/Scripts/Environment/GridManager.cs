@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridManager : Subject
 {
     [SerializeField] private GridScriptableObject gridScriptable;
+    [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private Transform wallParent;
     [SerializeField] private Transform floorParent;
 
@@ -138,7 +139,7 @@ public class GridManager : Subject
 
     public void NotifyScore()
     {
-        NotifyObservers(Random.Range(2, 6), ScoreType.Score);
+        NotifyObservers(Random.Range(2, 6), ValueType.Score);
     }
 
     public void NotifyType(EntityType eType)
@@ -147,11 +148,16 @@ public class GridManager : Subject
 
         if (eType == EntityType.Dark)
         {
-            NotifyObservers(Value, ScoreType.DarkSpirit);
+            NotifyObservers(Value, ValueType.DarkSpiritCount);
         }
         else
         {
-            NotifyObservers(Value, ScoreType.LightSpirit);
+            NotifyObservers(Value, ValueType.LightSpiritCount);
         }
+    }
+
+    public void HealPlayer()
+    {
+        playerHealth.HealPlayer(Random.Range(5, 10));
     }
 }
